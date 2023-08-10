@@ -15,7 +15,7 @@ namespace ET
             {
                 accountSession = zoneScene.GetComponent<NetKcpComponent>().Create(NetworkHelper.ToIPEndPoint(address));
                 password = MD5Helper.StringMD5(password);
-                a2CLoginAccount = (A2C_LoginAccount)await accountSession.Call(new C2A_LoginAccount() { AccountName = account, Password = password });
+                a2CLoginAccount = (A2C_LoginAccount) await accountSession.Call(new C2A_LoginAccount() { AccountName = account, Password = password });
             }
             catch (Exception e)
             {
@@ -93,15 +93,20 @@ namespace ET
                 return ErrorCode.ERR_NetWorkError;
             }
 
-            RoleInfo newRoleInfo = zoneScene.GetComponent<RoleInfosComponent>().AddComponent<RoleInfo>();
-            newRoleInfo.FromMessage(a2CCreateRole.RoleInfo);
-            zoneScene.GetComponent<RoleInfosComponent>().RoleInfos.Add(newRoleInfo);
-
             if (a2CCreateRole.Error != ErrorCode.ERR_Success)
             {
                 Log.Error(a2CCreateRole.Error.ToString());
                 return a2CCreateRole.Error;
             }
+
+            RoleInfo newRoleInfo = zoneScene.GetComponent<RoleInfosComponent>().GetComponent<RoleInfo>();
+            if (null != newRoleInfo)
+            {
+                zoneScene.GetComponent<RoleInfosComponent>().RemoveComponent<RoleInfo>();
+            }
+            newRoleInfo = zoneScene.GetComponent<RoleInfosComponent>().AddComponent<RoleInfo>();
+            newRoleInfo.FromMessage(a2CCreateRole.RoleInfo);
+            zoneScene.GetComponent<RoleInfosComponent>().RoleInfos.Add(newRoleInfo);
 
             await ETTask.CompletedTask;
             return ErrorCode.ERR_Success;

@@ -50,7 +50,7 @@ namespace ET
 
                     foreach (var roleInfo in roleInfos)
                     {
-                        // response.RoleInfoList.Add(roleInfo.ToMessage());
+                        response.RoleInfoList.Add(roleInfo.ToMessage());
                         roleInfo?.Dispose();
                     }
                     roleInfos.Clear();

@@ -16,9 +16,10 @@ namespace ET
                 return;
             }
 
-            //通过验证就移除 SessionAcceptTimeoutComponent
+            //通过验证就移除 SessionAcceptTimeoutComponent (5s)
             session.RemoveComponent<SessionAcceptTimeoutComponent>();
 
+            //多次请求(玩家快速多次点击登录按钮)
             if (session.GetComponent<SessionLockingComponent>() != null)
             {
                 response.Error = ErrorCode.ERR_RequestRepeatedly;
@@ -52,10 +53,10 @@ namespace ET
                 return;
             }
 
-            //下面的都是 异步的
+            //下面的都是 异步的, 需要锁定, 必须确保这里的 登录逻辑都被执行完了, 才能执行下一条登录消息
             using (session.AddComponent<SessionLockingComponent>())
             {
-                //协程锁
+                //协程锁工具 (防止情况, AB两个同学 同时注册 相同的账号 和密码, 导致数据库中存在不唯一的两个相同的数据, 造成数据错乱)
                 using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.LoginAccount, request.AccountName.Trim().GetHashCode()))
                 {
                     //通过游戏服务器查询我们的数据库中是否存在这个账号
@@ -110,8 +111,10 @@ namespace ET
                     //如果有其他玩家, 先把其他玩家踢下线
                     long accountSessionInstanceId = session.DomainScene().GetComponent<AccountSessionsComponent>().Get(account.Id);
                     Session otherSession = Game.EventSystem.Get(accountSessionInstanceId) as Session;
+                    //向客户端发送断开消息
                     otherSession?.Send(new A2C_Disconnect(){Error = 0});
                     otherSession?.Disconnect().Coroutine();
+                    
                     session.DomainScene().GetComponent<AccountSessionsComponent>().Add(account.Id, session.InstanceId);
                     
                     //玩家登录后,如果长时间不做处理, 就自动掉线

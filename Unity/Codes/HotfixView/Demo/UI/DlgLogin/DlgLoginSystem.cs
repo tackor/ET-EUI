@@ -30,6 +30,7 @@ namespace ET
 					ConstValue.LoginAddress, 
 					self.View.E_AccountInputField.GetComponent<InputField>().text, 
 					self.View.E_PasswordInputField.GetComponent<InputField>().text);
+				
 				if (errorCode != ErrorCode.ERR_Success)
 				{
 					Log.Error(errorCode.ToString());

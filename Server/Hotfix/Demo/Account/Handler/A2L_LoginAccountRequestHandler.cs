@@ -12,6 +12,7 @@ namespace ET
             //协程锁
             using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.LoginCenter, accountId.GetHashCode()))
             {
+                //登录中心服 查看是否已经登录
                 if (!scene.GetComponent<LoginInfoRecordComponent>().IsExist(accountId))
                 {
                     reply();
@@ -23,7 +24,8 @@ namespace ET
                 StartSceneConfig gateConfig = RealmGateAddressHelper.GetGate(zone, accountId);
                 
                 // 从登录中心服务器 发送 一条消息到 Gate网关服务器 通知踢玩家下线
-                var g2LDisconnectGateUnit = (G2L_DisconnectGateUnit) await MessageHelper.CallActor(gateConfig.InstanceId, new L2G_DisconnectGateUnit() { AccountId = accountId });
+                var g2LDisconnectGateUnit = (G2L_DisconnectGateUnit) await MessageHelper.CallActor(gateConfig.InstanceId, 
+                    new L2G_DisconnectGateUnit() { AccountId = accountId });
                 response.Error = g2LDisconnectGateUnit.Error;
                 reply();
             }
