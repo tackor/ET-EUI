@@ -217,7 +217,7 @@ namespace ET
         {
             string realmAddress = zoneScene.GetComponent<AccountInfoComponent>().RealmAddress;
             
-            //连接Realm, 获取分配的Gate
+            //1.连接Realm, 获取分配的Gate
             R2C_LoginRealm r2CLogin;
             Session session = zoneScene.GetComponent<NetKcpComponent>().Create(NetworkHelper.ToIPEndPoint(realmAddress));
             try
@@ -246,7 +246,7 @@ namespace ET
             gateSession.AddComponent<PingComponent>();
             zoneScene.GetComponent<SessionComponent>().Session = gateSession;
             
-            //2. 开始连接Gate
+            //2.开始连接Gate
             long currentRoleId = zoneScene.GetComponent<RoleInfosComponent>().CurrentRoleId;
             G2C_LoginGate g2CLoginGate = null;
             try
@@ -293,6 +293,7 @@ namespace ET
             }
             
             Log.Debug("角色进入游戏成功 !");
+            zoneScene.GetComponent<PlayerComponent>().MyId = g2CEnterGame.MyId;
 
             return ErrorCode.ERR_Success;
         }

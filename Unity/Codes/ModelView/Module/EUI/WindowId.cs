@@ -13,6 +13,7 @@
         WindowID_Server,
         
         WindowID_Roles,
+        windowID_Main,
         
     }
 }

@@ -74,7 +74,8 @@ namespace ET
                     Log.Error(errorCode.ToString());
                     return;
                 }
-                
+
+                self.ZoneScene().GetComponent<UIComponent>().ShowWindow(WindowID.windowID_Main);
                 self.DomainScene().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_Roles);
             }
             catch (Exception e)
