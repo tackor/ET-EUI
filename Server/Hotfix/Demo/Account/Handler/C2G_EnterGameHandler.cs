@@ -43,7 +43,7 @@ namespace ET
             long instanceId = session.InstanceId;
             using (session.AddComponent<SessionLockingComponent>())
             {
-                using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.LoginGate, player.Account.GetHashCode()))
+                using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.LoginGate, player.AccountId.GetHashCode()))
                 {
                     if (instanceId != session.InstanceId || player.IsDisposed)
                     {
@@ -95,7 +95,8 @@ namespace ET
                         // Unit unit = UnitFactory.Create(gateMapComponent.Scene, player.Id, UnitType.Player);
 
                         (bool isNewPlayer, Unit unit) = await UnitHelper.LoadUnit(player);
-                        unit.AddComponent<UnitGateComponent, long>(session.InstanceId);
+                        // unit.AddComponent<UnitGateComponent, long>(session.InstanceId);
+                        unit.AddComponent<UnitGateComponent, long>(player.InstanceId);
                         
                         //玩家Unit的初始化操作
                         await UnitHelper.InitUnit(unit, isNewPlayer);
@@ -120,7 +121,7 @@ namespace ET
                     }
                     catch (Exception e)
                     {
-                        Log.Error($"角色进入游戏逻辑服出现问题 账号Id: {player.Account} 角色Id: {player.Id} 异常信息: {e.ToString()}");
+                        Log.Error($"角色进入游戏逻辑服出现问题 账号Id: {player.AccountId} 角色Id: {player.Id} 异常信息: {e.ToString()}");
                         response.Error = ErrorCode.ERR_EnterGameError;
                         reply();
                         await DisconnectHelper.KickPlayer(player, true);
