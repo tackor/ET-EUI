@@ -75,7 +75,7 @@ namespace ET
                     return;
                 }
 
-                self.ZoneScene().GetComponent<UIComponent>().ShowWindow(WindowID.windowID_Main);
+                self.ZoneScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Main);
                 self.DomainScene().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_Roles);
             }
             catch (Exception e)

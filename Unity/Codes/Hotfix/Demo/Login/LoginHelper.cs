@@ -61,8 +61,6 @@ namespace ET
                 return a2CGetServerInfos.Error;
             }
             
-            Log.Debug($"查错----: {a2CGetServerInfos.ServerInfoList.Count}");
-
             foreach (var serverdInfoProto in a2CGetServerInfos.ServerInfoList)
             {
                 ServerInfo serverInfo = zoneScene.GetComponent<ServerInfosComponent>().AddChild<ServerInfo>();

@@ -35,6 +35,7 @@ namespace ET
         public StartSceneConfig GetUnitCacheConfig(long unitId)
         {
             int zone = UnitIdStruct.GetUnitZone(unitId);
+            Log.Debug($"tackor_Debug_D ----- {UnitCaches.Count}, {unitId}, {zone}");
             return UnitCaches[zone];
         }
         

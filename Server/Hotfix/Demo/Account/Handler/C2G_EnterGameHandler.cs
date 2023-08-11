@@ -30,7 +30,7 @@ namespace ET
                 reply();
                 return;
             }
-
+            
             Player player = Game.EventSystem.Get(sessionPlayerComponent.PlayerInstanceId) as Player;
 
             if (player == null || player.IsDisposed)
@@ -99,7 +99,8 @@ namespace ET
                         unit.AddComponent<UnitGateComponent, long>(player.InstanceId);
                         
                         //玩家Unit的初始化操作
-                        await UnitHelper.InitUnit(unit, isNewPlayer);                        
+                        await UnitHelper.InitUnit(unit, isNewPlayer);
+                        player.UnitId = unit.Id;
                         response.MyId = unit.Id;
                         reply();
                         

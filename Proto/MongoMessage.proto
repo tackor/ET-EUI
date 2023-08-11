@@ -30,3 +30,4 @@ message UnitCache2Other_GetUnit //IActorResponse
 	repeated Entity EntityList = 1;
 	repeated string ComponentNameList = 2;
 }
+

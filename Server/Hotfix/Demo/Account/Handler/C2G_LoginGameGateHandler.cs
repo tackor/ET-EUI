@@ -37,6 +37,7 @@ namespace ET
             scene.GetComponent<GateSessionKeyComponent>().Remove(request.Account);
 
             long instanceId = session.InstanceId;
+            
             using (session.AddComponent<SessionLockingComponent>())
             {
                 using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.LoginGate, request.Account.GetHashCode()))
