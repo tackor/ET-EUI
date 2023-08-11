@@ -13,7 +13,9 @@
         WindowID_Server,
         
         WindowID_Roles,
-        windowID_Main,
+        WindowID_Main,
+        
+        WindowID_Loading,   //加载界面
         
     }
 }

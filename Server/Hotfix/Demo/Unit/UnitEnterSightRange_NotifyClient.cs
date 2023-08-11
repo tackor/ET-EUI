@@ -4,7 +4,7 @@
     [Event]
     public class UnitEnterSightRange_NotifyClient: AEvent<EventType.UnitEnterSightRange>
     {
-        protected override void Run(EventType.UnitEnterSightRange args)
+        protected override async ETTask Run(EventType.UnitEnterSightRange args)
         {
             AOIEntity a = args.A;
             AOIEntity b = args.B;
@@ -22,6 +22,7 @@
             Unit ub = b.GetParent<Unit>();
 
             UnitHelper.NoticeUnitAdd(ua, ub);
+            await ETTask.CompletedTask;
         }
     }
 }
