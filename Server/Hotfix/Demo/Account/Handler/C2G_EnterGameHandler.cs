@@ -100,7 +100,7 @@ namespace ET
                         
                         //玩家Unit的初始化操作
                         await UnitHelper.InitUnit(unit, isNewPlayer);
-                        player.UnitId = unit.Id;
+                        // player.UnitId = unit.Id;
                         response.MyId = unit.Id;
                         reply();
                         
