@@ -3,14 +3,15 @@ using System;
 namespace ET
 {
     [ObjectSystem]
-    public class UnitCacheComponentAwakeSystem: AwakeSystem<UnitCacheComponent>
+    [FriendClassAttribute(typeof(ET.UnitCache))]
+    public class UnitCacheComponentAwakeSystem : AwakeSystem<UnitCacheComponent>
     {
         public override void Awake(UnitCacheComponent self)
         {
             self.UnitCacheKeyList.Clear();
             foreach (Type type in Game.EventSystem.GetTypes().Values)
             {
-                if (type != typeof (IUnitCache) && typeof (IUnitCache).IsAssignableFrom(type))
+                if (type != typeof(IUnitCache) && typeof(IUnitCache).IsAssignableFrom(type))
                 {
                     self.UnitCacheKeyList.Add(type.Name);
                 }
@@ -37,7 +38,8 @@ namespace ET
             self.UnitCaches.Clear();
         }
     }
-
+    [FriendClassAttribute(typeof(ET.UnitCacheComponent))]
+    [FriendClassAttribute(typeof(ET.UnitCache))]
     public static class UnitCacheComponentSystem
     {
         public static async ETTask<Entity> Get(this UnitCacheComponent self, long unitId, string key)

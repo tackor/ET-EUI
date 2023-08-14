@@ -3,17 +3,18 @@ using System.Collections.Generic;
 
 namespace ET
 {
+    [FriendClassAttribute(typeof(ET.UnitCacheComponent))]
     public class Other2UnitCache_GetUnitHandler : AMActorRpcHandler<Scene, Other2UnitCache_GetUnit, UnitCache2Other_GetUnit>
     {
         protected override async ETTask Run(Scene scene, Other2UnitCache_GetUnit request, UnitCache2Other_GetUnit response, Action reply)
         {
             UnitCacheComponent unitCacheComponent = scene.GetComponent<UnitCacheComponent>();
-            Dictionary<string, Entity > dictionary = MonoPool.Instance.Fetch(typeof (Dictionary<string, Entity>)) as Dictionary<string, Entity>;
+            Dictionary<string, Entity> dictionary = MonoPool.Instance.Fetch(typeof(Dictionary<string, Entity>)) as Dictionary<string, Entity>;
             try
             {
                 if (request.ComponentNameList.Count == 0)
                 {
-                    dictionary.Add(nameof (Unit), null);
+                    dictionary.Add(nameof(Unit), null);
                     foreach (string s in unitCacheComponent.UnitCacheKeyList)
                     {
                         dictionary.Add(s, null);
