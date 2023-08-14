@@ -19,7 +19,9 @@ namespace ET
         public StartSceneConfig LoginCenterConfig;
         
         public List<StartSceneConfig> Robots = new List<StartSceneConfig>();
-        
+
+        public Dictionary<int, StartSceneConfig> UnitCaches = new Dictionary<int, StartSceneConfig>();
+
         public List<StartSceneConfig> GetByProcess(int process)
         {
             return this.ProcessScenes[process];
@@ -28,6 +30,19 @@ namespace ET
         public StartSceneConfig GetBySceneName(int zone, string name)
         {
             return this.ZoneScenesByName[zone][name];
+        }
+
+        /// <summary>
+        /// 获取缓存服的配置
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <returns></returns>
+        public StartSceneConfig GetUnitCacheConfig(long unitId)
+        {
+            //zone 就是 unit 所在的区服
+            int zone = UnitIdStruct.GetUnitZone(unitId);
+            //每个区服对应的缓存服
+            return UnitCaches[zone];
         }
         
         public override void AfterEndInit()
@@ -58,6 +73,9 @@ namespace ET
                         break;
                     case SceneType.LoginCenter:
                         this.LoginCenterConfig = startSceneConfig;
+                        break;
+                    case SceneType.UnitCache:
+                        this.UnitCaches.Add(startSceneConfig.Zone, startSceneConfig);
                         break;
                 }
             }
