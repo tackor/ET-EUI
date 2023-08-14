@@ -20,10 +20,14 @@
             M2C_CreateMyUnit m2CCreateMyUnit = waitCreateMyUnit.Message;
             Unit unit = UnitFactory.Create(currentScene, m2CCreateMyUnit.Unit);
             unitComponent.Add(unit);
+
+            //故意增加2s的等待, 用于模拟加载场景和资源的过程
+            await TimerComponent.Instance.WaitAsync(2000);
             
-            zoneScene.RemoveComponent<AIComponent>();
+            // zoneScene.RemoveComponent<AIComponent>();
             
-            Game.EventSystem.PublishAsync(new EventType.SceneChangeFinish() {ZoneScene = zoneScene, CurrentScene = currentScene}).Coroutine();
+            // Game.EventSystem.PublishAsync(new EventType.SceneChangeFinish() {ZoneScene = zoneScene, CurrentScene = currentScene}).Coroutine();
+            Game.EventSystem.Publish(new EventType.SceneChangeFinish() {ZoneScene = zoneScene, CurrentScene = currentScene});
 
             // 通知等待场景切换的协程
             zoneScene.GetComponent<ObjectWait>().Notify(new WaitType.Wait_SceneChangeFinish());

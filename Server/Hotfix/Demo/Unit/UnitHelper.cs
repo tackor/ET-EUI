@@ -79,7 +79,7 @@ namespace ET
             bool isNewUnit = unit == null;
             if (isNewUnit)
             {
-                unit = UnitFactory.Create(gateMapComponent.Scene, player.Id, UnitType.Player);
+                unit = UnitFactory.Create(gateMapComponent.Scene, player.UnitId, UnitType.Player);
                 UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
             }
 

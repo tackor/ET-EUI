@@ -5,9 +5,10 @@ namespace ET
 {
     public class AppStart_Init: AEvent<EventType.AppStart>
     {
-        protected override void Run(EventType.AppStart args)
+        protected override async ETTask Run(EventType.AppStart args)
         {
             RunAsync(args).Coroutine();
+            await ETTask.CompletedTask;
         }
         
         private async ETTask RunAsync(EventType.AppStart args)

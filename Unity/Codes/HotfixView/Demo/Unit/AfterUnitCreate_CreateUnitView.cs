@@ -7,8 +7,6 @@ namespace ET
     {
         protected override async ETTask Run(EventType.AfterUnitCreate args)
         {
-            ---20:10
-                    
             // Unit View层
             // 这里可以改成异步加载，demo就不搞了
             await ResourcesComponent.Instance.LoadBundleAsync("Kinight.unit3d");
@@ -21,6 +19,7 @@ namespace ET
             args.Unit.AddComponent<GameObjectComponent>().GameObject = go;
             args.Unit.AddComponent<AnimatorComponent>();
             args.Unit.Position = Vector3.zero;
+            
             await ETTask.CompletedTask;
         }
     }

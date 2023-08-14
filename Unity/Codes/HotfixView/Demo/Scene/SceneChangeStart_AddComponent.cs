@@ -2,9 +2,10 @@ namespace ET
 {
     public class SceneChangeStart_AddComponent: AEvent<EventType.SceneChangeStart>
     {
-        protected override void Run(EventType.SceneChangeStart args)
+        protected override async ETTask Run(EventType.SceneChangeStart args)
         {
             RunAsync(args).Coroutine();
+            await ETTask.CompletedTask;
         }
         
         private async ETTask RunAsync(EventType.SceneChangeStart args)

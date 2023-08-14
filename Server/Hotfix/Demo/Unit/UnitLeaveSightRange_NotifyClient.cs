@@ -4,7 +4,7 @@
     [Event]
     public class UnitLeaveSightRange_NotifyClient: AEvent<EventType.UnitLeaveSightRange>
     {
-        protected override void Run(EventType.UnitLeaveSightRange args)
+        protected override async ETTask Run(EventType.UnitLeaveSightRange args)
         {
             AOIEntity a = args.A;
             AOIEntity b = args.B;
@@ -14,6 +14,8 @@
             }
 
             UnitHelper.NoticeUnitRemove(a.GetParent<Unit>(), b.GetParent<Unit>());
+
+            await ETTask.CompletedTask;
         }
     }
 }

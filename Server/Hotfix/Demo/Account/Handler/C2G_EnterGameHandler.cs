@@ -30,7 +30,7 @@ namespace ET
                 reply();
                 return;
             }
-
+            
             Player player = Game.EventSystem.Get(sessionPlayerComponent.PlayerInstanceId) as Player;
 
             if (player == null || player.IsDisposed)
@@ -100,15 +100,12 @@ namespace ET
                         
                         //玩家Unit的初始化操作
                         await UnitHelper.InitUnit(unit, isNewPlayer);
+                        // player.UnitId = unit.Id;
+                        response.MyId = unit.Id;
+                        reply();
                         
-                        long unitId = unit.Id;
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.DomainZone(), "Game");
                         await TransferHelper.Transfer(unit, startSceneConfig.InstanceId, startSceneConfig.Name);
-
-                        player.UnitId = unitId;
-                        response.MyId = unitId;
-
-                        reply();
 
                         SessionStateComponent sessionStateComponent = session.GetComponent<SessionStateComponent>();
                         if (sessionStateComponent == null)
