@@ -78,8 +78,12 @@ namespace ET
             bool isNewUnit = null == unit;
             if (isNewUnit)
             {
-                unit = UnitFactory.Create(gateMapComponent.Scene, unit.Id, UnitType.Player);
-                UnitCacheHelper.AddOrUpdateAllCache(unit);
+                unit = UnitFactory.Create(gateMapComponent.Scene, player.UnitId, UnitType.Player);
+                
+                var roleInfos = await DBManagerComponent.Instance.GetZoneDB(player.DomainZone()).Query<RoleInfo>(d => d.Id == player.UnitId);
+                unit.AddComponent(roleInfos[0]);
+                
+                UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
             }
 
             return (isNewUnit, unit);
