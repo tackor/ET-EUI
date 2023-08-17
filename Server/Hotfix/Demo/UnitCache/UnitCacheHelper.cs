@@ -35,14 +35,14 @@ namespace ET
             {
                 return null;
             }
-            scene.AddChild(unit);
+            // scene.AddChild(unit);
+            scene.GetComponent<UnitComponent>().AddChild(unit);
             foreach (Entity entity in queryUnit.EntityList)
             {
                 if (null == entity || entity is Unit)
                 {
                     continue;
                 }
-
                 unit.AddComponent(entity);
             }
             return unit;
@@ -83,7 +83,7 @@ namespace ET
         /// 保存Unit及Unit身上组件到缓存服及数据库中
         /// </summary>
         /// <param name="unit"></param>
-        public static void AddOrUpdateAllCache(Unit unit)
+        public static void AddOrUpdateUnitAllCache(Unit unit)
         {
             Other2UnitCache_AddOrUpdateUnit msg = new Other2UnitCache_AddOrUpdateUnit() { UnitId = unit.Id };
             msg.EntityTypes.Add(unit.GetType().FullName);

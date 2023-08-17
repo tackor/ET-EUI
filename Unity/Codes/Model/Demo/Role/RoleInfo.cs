@@ -6,7 +6,7 @@ namespace ET
         Freeze,
     }
     
-    [ComponentOf(typeof(RoleInfosComponent))]
+    [ComponentOf]
     public class RoleInfo : Entity, IAwake
     {
         public string Name;
