@@ -15,5 +15,7 @@
         WindowID_Roles,
         WindowID_Main,
         
+        WindowID_Loading,
+        
     }
 }

@@ -12,7 +12,6 @@
         //     }
         // }
         
-        
         [ObjectSystem]
         public class PlayerAwakeSystem : AwakeSystem<Player, long,long>
         {
@@ -22,7 +21,6 @@
                 self.UnitId = roleId;
             }
         }
-        
         
         [ObjectSystem]
         public class PlayerDestroySystem : DestroySystem<Player>

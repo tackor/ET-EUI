@@ -95,10 +95,9 @@ namespace ET
                         
                         //从数据库或缓存中加载出 Unit 实体及其相关组件
                         (bool isNewPlayer, Unit unit) = await UnitHelper.LoadUnit(player);
-                        unit.AddComponent<UnitGateComponent, long>(player.InstanceId);
 
-                        // Unit unit = UnitFactory.Create(gateMapComponent.Scene, player.Id, UnitType.Player);
                         // unit.AddComponent<UnitGateComponent, long>(session.InstanceId);
+                        unit.AddComponent<UnitGateComponent, long>(player.InstanceId);
 
                         //玩家Unit上线后的初始化操作
                         await UnitHelper.InitUnit(unit, isNewPlayer);
@@ -107,7 +106,6 @@ namespace ET
 
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.DomainZone(), "Game");
                         await TransferHelper.Transfer(unit, startSceneConfig.InstanceId, startSceneConfig.Name);
-
 
                         SessionStateComponent sessionStateComponent = session.GetComponent<SessionStateComponent>();
                         if (sessionStateComponent == null)
