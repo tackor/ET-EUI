@@ -23,7 +23,7 @@
             
             // zoneScene.RemoveComponent<AIComponent>();
             //等待2s,模拟加载
-            // await TimerComponent.Instance.WaitAsync(2000);
+            await TimerComponent.Instance.WaitAsync(2000);
             
             Game.EventSystem.PublishAsync(new EventType.SceneChangeFinish() {ZoneScene = zoneScene, CurrentScene = currentScene}).Coroutine();
 

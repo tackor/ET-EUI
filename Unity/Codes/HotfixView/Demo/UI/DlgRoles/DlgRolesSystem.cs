@@ -40,7 +40,7 @@ namespace ET
             Scroll_Item_Role item = self.ScrollItemRoles[index].BindTrans(transform);
             RoleInfo info = self.ZoneScene().GetComponent<RoleInfosComponent>().RoleInfos[index];
 
-            item.EImage_SelectImage.color = info.Id == self.ZoneScene().GetComponent<RoleInfosComponent>().CurrentRoleId ? Color.green : Color.gray;
+            item.EImage_SelectImage.color = info.Id == self.ZoneScene().GetComponent<RoleInfosComponent>().CurrentRoleId ? Color.red : Color.gray;
             item.EText_RoleNameText.SetText(info.Name);
             item.EButton_SelectButton.AddListener(() => { self.OnRoleItemClickHandler(info.Id);});
         }
