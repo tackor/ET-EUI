@@ -7,7 +7,7 @@ namespace ET
 	[EnableMethod]
 	public  class DlgMainViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_CharacterButton
+		public UnityEngine.UI.Button E_RoleButton
      	{
      		get
      		{
@@ -16,15 +16,15 @@ namespace ET
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_CharacterButton == null )
+     			if( this.m_E_RoleButton == null )
      			{
-		    		this.m_E_CharacterButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Character");
+		    		this.m_E_RoleButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Role");
      			}
-     			return this.m_E_CharacterButton;
+     			return this.m_E_RoleButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CharacterImage
+		public UnityEngine.UI.Image E_RoleImage
      	{
      		get
      		{
@@ -33,11 +33,11 @@ namespace ET
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_CharacterImage == null )
+     			if( this.m_E_RoleImage == null )
      			{
-		    		this.m_E_CharacterImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Character");
+		    		this.m_E_RoleImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Role");
      			}
-     			return this.m_E_CharacterImage;
+     			return this.m_E_RoleImage;
      		}
      	}
 
@@ -94,16 +94,16 @@ namespace ET
 
 		public void DestroyWidget()
 		{
-			this.m_E_CharacterButton = null;
-			this.m_E_CharacterImage = null;
+			this.m_E_RoleButton = null;
+			this.m_E_RoleImage = null;
 			this.m_E_RoleLevelText = null;
 			this.m_E_GoldText = null;
 			this.m_E_ExpText = null;
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_CharacterButton = null;
-		private UnityEngine.UI.Image m_E_CharacterImage = null;
+		private UnityEngine.UI.Button m_E_RoleButton = null;
+		private UnityEngine.UI.Image m_E_RoleImage = null;
 		private UnityEngine.UI.Text m_E_RoleLevelText = null;
 		private UnityEngine.UI.Text m_E_GoldText = null;
 		private UnityEngine.UI.Text m_E_ExpText = null;
