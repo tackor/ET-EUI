@@ -1,4 +1,4 @@
-﻿namespace ET
+namespace ET
 {
     public enum WindowID
     {
@@ -17,5 +17,6 @@
         
         WindowID_Loading,
         
-    }
+    	WindowID_RoleInfo,
+	}
 }

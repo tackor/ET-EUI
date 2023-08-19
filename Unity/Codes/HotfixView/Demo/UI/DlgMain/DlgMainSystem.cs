@@ -12,7 +12,7 @@ namespace ET
 
 		public static void RegisterUIEvent(this DlgMain self)
 		{
-			self.View.E_RoleButton.AddListenerAsync(() => { return self.OnRoleButtonClickHandler();});
+			self.View.E_RoleButton.AddListenerAsync(self.OnRoleButtonClickHandler);
 		}
 
 		public static void ShowWindow(this DlgMain self, Entity contextData = null)
@@ -35,12 +35,13 @@ namespace ET
 		{
 			try
 			{
-				int error = await NumericHelper.TestUpdateNumeric(self.ZoneScene());
-				if (error != ErrorCode.ERR_Success)
-				{
-					return;
-				}
-				Log.Debug("发送更新属性测试消息成功 !");
+				// int error = await NumericHelper.TestUpdateNumeric(self.ZoneScene());
+				// if (error != ErrorCode.ERR_Success)
+				// {
+				// 	return;
+				// }
+				// Log.Debug("发送更新属性测试消息成功 !");
+				await self.ZoneScene().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleInfo);
 			}
 			catch (Exception e)
 			{
