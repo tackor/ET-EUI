@@ -25,7 +25,7 @@ namespace ET
 
         public const int ERR_RoleNameIsNull = 200010;   //游戏角色名称为空
         public const int ERR_RoleNameSame = 200011;     //游戏角色同名
-        public const int ERR_RoleNotExist = 200012;     //游戏角色不存在
+        public const int ERR_RoleNotExist = 200012;     //游戏角色不存在ErrorCode
         
         public const int ERR_ConnectGateKeyError = 200014;  //连接Gate的令牌错误
         public const int ERR_RequestSceneTypeError = 200015;  //请求的Scene错误
