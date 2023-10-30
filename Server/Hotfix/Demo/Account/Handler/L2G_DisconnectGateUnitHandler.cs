@@ -2,6 +2,7 @@ using System;
 
 namespace ET
 {
+    [FriendClassAttribute(typeof(ET.SessionPlayerComponent))]
     public class L2G_DisconnectGateUnitHandler : AMActorRpcHandler<Scene, L2G_DisconnectGateUnit, G2L_DisconnectGateUnit>
     {
         protected override async ETTask Run(Scene scene, L2G_DisconnectGateUnit request, G2L_DisconnectGateUnit response, Action reply)
@@ -17,7 +18,7 @@ namespace ET
                     reply();
                     return;
                 }
-                
+
                 scene.GetComponent<GateSessionKeyComponent>().Remove(accountId);
                 Session gateSession = Game.EventSystem.Get(player.SessionInstanceId) as Session;
                 if (gateSession != null && !gateSession.IsDisposed)
@@ -26,7 +27,7 @@ namespace ET
                     {
                         gateSession.GetComponent<SessionPlayerComponent>().isLoginAgain = true;
                     }
-                    gateSession.Send(new A2C_Disconnect(){Error = ErrorCode.ERR_OtherAccountLogin});
+                    gateSession.Send(new A2C_Disconnect() { Error = ErrorCode.ERR_OtherAccountLogin });
                     gateSession?.Disconnect().Coroutine();
                 }
 
